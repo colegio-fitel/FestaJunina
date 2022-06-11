@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/instascan.min.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="py/brython.js"></script>
+    <script type="text/javascript" src="py/brython_stdlib.js"></script>
+    <title>Controle Festa Junina</title>
+</head>
+<body onload="brython({debug:1,pythonpath:['/js']});">
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3 class="text text-center text-muted">Controle Festa Junina</h3>
+            <div class="container">
+                <div class="row">
+                    <div class="col mb-2">
+                        <button type="button" class="btn btn-secondary" id="camera">Camera</button>
+                        <button type="button" class="btn btn-danger" id="reset">Reset</button>
+                        <button type="button" class="btn btn-primary">
+                            Entradas <span class="badge text-bg-secondary" id="entradas"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col col-xl-7 col-xxl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+                <video id="preview" class="embed-responsive embed-responsive-16by9" playsinline style="height: 300px;"></video>
+                <div class="card-body text-success" id="resultado"></div>
+            </div>
+            <div class="col col-xl-5 col-xxl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+              <div class="jumbotron">
+                <h5 class="text text-center text-muted">Leituras Recentes </h5>
+                <ul id="convidadosRecentes" class="list-group overflow-auto" style="height: 250px;"></ul>
+              </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+a=new AudioContext() // browsers limit the number of concurrent audio contexts, so you better re-use'em
+
+function beep(vol, freq, duration){
+  v=a.createOscillator()
+  u=a.createGain()
+  v.connect(u)
+  v.frequency.value=freq
+  v.type="square"
+  u.connect(a.destination)
+  u.gain.value=vol*0.01
+  v.start(a.currentTime)
+  v.stop(a.currentTime+duration*0.001)
+}
+</script>
+
+<script type="text/python">
+from browser.local_storage import storage
+from browser import alert,window,document,bind
+from browser.html import LI,BR
+import json
+
+class entrada:
+    def __init__(self):
+        try:
+            self.convidados = json.loads(storage['convidados'])
+            document['entradas'].text = len(self.convidados)
+        except:
+            self.convidados = []
+            storage['convidados'] = json.dumps(self.convidados)
+            document['entradas'].text = len(self.convidados)
+    
+    def add_convidado(self,convidado):
+        self.convidados = json.loads(storage['convidados'])
+        self.convidados.append(convidado)
+        storage['convidados'] = json.dumps(self.convidados)
+        document['convidadosRecentes'] <= LI(f'Convite: {convidado}')
+        document['entradas'].text = len(self.convidados)
+    
+    def reset_convidados(self):
+        self.convidados = []
+        storage['convidados'] = json.dumps(self.convidados)
+        document['entradas'].text = len(self.convidados)
+
+
+
+banco = entrada()
+reset_convidados = getattr(banco,'reset_convidados')
+
+camera = 0
+
+scanner = window.Instascan.Scanner
+cams = window.Instascan.Camera
+scanner = scanner.new({'video':document.getElementById('preview')})
+
+def verifica_hash(numero,hash):
+    resultado = document['resultado']
+    try:
+        gerado = window.md5(f"LETIF{numero}")
+        if gerado == hash:
+            window.beep(100, 520, 200)
+            #window.navigator.vibrate(100)
+            resultado.clear()
+            resultado.classList.remove('text-danger')
+            resultado.classList.add('text-success')
+            resultado <= f'Acesso Liberado !! - Convite:{numero}'
+            banco.add_convidado(numero)
+
+        else:
+            resultado.clear()
+            resultado <= f'Qr-Code Invalido !! '
+            resultado.classList.remove('text-success')
+            resultado.classList.add('text-danger')
+            window.beep(999, 210, 800)
+            window.beep(999, 500, 800)
+    except:
+        resultado.clear()
+        resultado <= f'Qr-Code Invalido !! '
+        resultado.classList.remove('text-success')
+        resultado.classList.add('text-danger')
+        window.beep(999, 210, 800)
+        window.beep(999, 500, 800)
+        window.beep(999, 210, 800)
+        window.beep(999, 500, 800)
+    
+def aoscanear(conteudo,evt):
+    resultado = document['resultado']
+    try:
+        numero,hash = conteudo.split('-')
+        verifica_hash(numero,hash)
+    except:
+        resultado.clear()
+        resultado <= f'Qr-Code Invalido !! '
+        resultado.classList.remove('text-success')
+        resultado.classList.add('text-danger')
+        window.beep(999, 210, 800)
+        window.beep(999, 500, 800)
+        window.beep(999, 210, 800)
+        window.beep(999, 500, 800)
+
+
+
+scanner.addListener('scan',aoscanear)
+def sucesso(x):
+    if len(x) > 0:
+        scanner.stop()
+        scanner.start(x[camera])
+    else:
+        print('não achei nenhuma Camera')
+
+def falha(x):
+    print(f'Deu erro {x}')
+
+def inicia_camera():
+    window.window.Instascan.Camera.getCameras().then(sucesso,falha)
+
+botoes = document.select('button')
+
+@bind(botoes,'click')
+def seleciona_turma(evt):
+    global turma_selecionada
+    turma_selecionada = evt.target.text
+
+def muda_camera(evt):
+    global camera
+    if camera == 0:
+        camera = 1
+        inicia_camera()
+    else:
+        camera = 0
+        inicia_camera()
+
+document['camera'].bind("click",muda_camera)
+document['reset'].bind("click",reset_convidados())
+
+inicia_camera()
+</script>
+</body>
+</html>
