@@ -79,7 +79,29 @@ function envia_dados(){
 
 const inicio = () => {
     let btn = document.getElementById("btnEnviar");
-    btn.addEventListener('click',envia_dados(evt););
+    btn.addEventListener('click',()=>{
+      const nome = document.getElementById("nome").value;
+    const profissao = document.getElementById("funcao").value;
+    const endereco = document.getElementById("endereco").value;
+    const bairro = document.getElementById("bairro").value;
+    const cidade = document.getElementById("cidade").value;
+    const cep = document.getElementById("cep").value;
+    const cpf = document.getElementById("cpf").value;
+    const rg = document.getElementById("rg").value;
+
+    const dados = {
+        "nome":nome,
+        "profissao":profissao,
+        "endereco":endereco,
+        "bairro":bairro,
+        "cidade":cidade,
+        "cep":cep,
+        "cpf":cpf,
+        "rg":rg
+    }
+
+    window.Telegram.WebApp.sendData(dados);
+    };);
     window.Telegram.WebApp.ready();
 
 }
