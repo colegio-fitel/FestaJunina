@@ -16,7 +16,7 @@
         
                 <div class="form-group"></div>
                     <button type="submit" name="btnEnviar" id="btnEnviar" 
-                    class="btn btn-success btn-lg float-right"> Enviar </button>
+                    class="btn btn-success float-right"> Enviar </button>
                 </div>    
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome do Prestador</label>
@@ -79,7 +79,7 @@ function envia_dados(){
 
 const inicio = () => {
     let btn = document.getElementById("btnEnviar");
-    btn.addEventListener('click',envia_dados);
+    btn.addEventListener('click',envia_dados(evt););
     window.Telegram.WebApp.ready();
 
 }
