@@ -74,14 +74,14 @@ function envia_dados(){
         "rg":rg
     }
 
-    window.Telegram.WebApp.sendData(dados);
+    Telegram.WebApp.sendData(dados);
 }
 
 const inicio = () => {
     let btn = document.getElementById("btnEnviar");
     btn.addEventListener('click',()=>{
     //const nome = document.getElementById("nome").value;
-    //const profissao = document.getElementById("funcao").value;
+    //const profissao =.getElementById("funcao").value;
     //const endereco = document.getElementById("endereco").value;
     //const bairro = document.getElementById("bairro").value;
     //const cidade = document.getElementById("cidade").value;
@@ -100,9 +100,12 @@ const inicio = () => {
         "rg":rg
     }
     Alert('Fui Chamado');
-    //window.Telegram.WebApp.sendData('Eai Mano');
-    };);
-    window.Telegram.WebApp.ready();
+    Telegram.WebApp.sendData('Eai Mano');
+    Telegram.WebApp.close();
+};);
+    Telegram.WebApp.ready();
+
+Telegram.WebApp.expand();
 
 }
 </script>
