@@ -7,17 +7,18 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" type="text/css">
     <title>Cadastro de Prestador de Serviço</title>
+    <style type="text/css">
+        .painel{
+            height: 600px;
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
-        <h4 class="text-center text-muted">Cadastro de Prestador de Serviço</h4>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço</h3>
     </div>
-    <div class="container container-sm container-md">
-        
-                <div class="form-group"></div>
-                    <button type="submit" name="btnEnviar" id="btnEnviar" 
-                    class="btn btn-success float-right"> Enviar </button>
-                </div>    
+    <div class="container container-sm container-md painel">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome do Prestador</label>
                     <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite aqui o seu nome:" />
@@ -49,11 +50,17 @@
                 <div class="mb-3">
                     <label for="rg" class="form-label">RG</label>
                     <input class="form-control" type="text" name="rg" id="rg" placeholder="Digite o RG:" />
-                </div>  
+                </div>
+
+                <div class="form-group"></div>
+                    <button type="submit" name="btnEnviar" id="btnEnviar" 
+                    class="btn btn-success btn-lg float-right"> Enviar </button>
+                </div>      
     </div>
 <script type="text/javascript">
 
 function envia_dados(){
+    alert('estou aqui');
     const nome = document.getElementById("nome").value;
     const profissao = document.getElementById("funcao").value;
     const endereco = document.getElementById("endereco").value;
@@ -74,38 +81,15 @@ function envia_dados(){
         "rg":rg
     }
 
-    Telegram.WebApp.sendData(dados);
+    window.Telegram.WebApp.sendData('Ola Mundo!');
+    console.log('Fui Chamado!!);
 }
 
 const inicio = () => {
     let btn = document.getElementById("btnEnviar");
-    btn.addEventListener('click',()=>{
-    //const nome = document.getElementById("nome").value;
-    //const profissao =.getElementById("funcao").value;
-    //const endereco = document.getElementById("endereco").value;
-    //const bairro = document.getElementById("bairro").value;
-    //const cidade = document.getElementById("cidade").value;
-    //const cep = document.getElementById("cep").value;
-    //const cpf = document.getElementById("cpf").value;
-    //const rg = document.getElementById("rg").value;
-
-    const dados = {
-        "nome":nome,
-        "profissao":profissao,
-        "endereco":endereco,
-        "bairro":bairro,
-        "cidade":cidade,
-        "cep":cep,
-        "cpf":cpf,
-        "rg":rg
-    }
-    Alert('Fui Chamado');
-    Telegram.WebApp.sendData('Eai Mano');
-    Telegram.WebApp.close();
-};);
-    Telegram.WebApp.ready();
-
-Telegram.WebApp.expand();
+    btn.addEventListener('click',envia_dados);
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
 
 }
 </script>
