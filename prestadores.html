@@ -9,7 +9,7 @@
     <title>Cadastro de Prestador de Serviço</title>
     <style type="text/css">
         .painel{
-            height: 300px;
+            height: 600px;
             overflow-y: scroll;
         }
     </style>
@@ -82,10 +82,9 @@ function envia_dados(){
     }
 
     window.Telegram.WebApp.sendData('Ola Mundo!');
-    console.log('Fui Chamado!!);
 }
 
-const inicio = () => {
+function inicio(){
     let btn = document.getElementById("btnEnviar");
     btn.addEventListener('click',envia_dados);
     window.Telegram.WebApp.ready();
