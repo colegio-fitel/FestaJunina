@@ -68,7 +68,6 @@
 <script type="text/javascript">
 
 function envia_dados(){
-    alert('estou aqui');
     const nome = document.getElementById("nome").value;
     const profissao = document.getElementById("funcao").value;
     const endereco = document.getElementById("endereco").value;
@@ -90,6 +89,8 @@ function envia_dados(){
     }
 
     window.Telegram.WebApp.sendData('Ola Mundo!');
+    window.Telegram.WebApp.close();
+    alert(rg);
 }
 </script>
 </body>
