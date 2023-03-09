@@ -13,6 +13,14 @@
             overflow-y: scroll;
         }
     </style>
+    <script type="text/javascript">
+    function inicio(){
+        let btn = document.getElementById("btnEnviar");
+        btn.addEventListener('click',envia_dados);
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+}
+    </script>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
@@ -82,14 +90,6 @@ function envia_dados(){
     }
 
     window.Telegram.WebApp.sendData('Ola Mundo!');
-}
-
-function inicio(){
-    let btn = document.getElementById("btnEnviar");
-    btn.addEventListener('click',envia_dados);
-    window.Telegram.WebApp.ready();
-    window.Telegram.WebApp.expand();
-
 }
 </script>
 </body>
