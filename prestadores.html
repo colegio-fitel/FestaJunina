@@ -15,10 +15,18 @@
     </style>
     <script type="text/javascript">
     function inicio(){
-        let btn = document.getElementById("btnEnviar");
-        btn.addEventListener('click',envia_dados);
         window.Telegram.WebApp.ready();
         window.Telegram.WebApp.expand();
+
+        const mainButton = window.Telegram.WebApp.MainButton; 
+        mainButton.text = "Salvar preferências"; 
+        mainButton.enable(); 
+        mainButton.show();
+        
+        mainButton.onClick( function (){
+            alert('estou aqui!') 
+            window.Telegram.WebApp.sendData(JSON.stringify("msg:Eai Mano")); 
+        }) 
 }
     </script>
 </head>
@@ -58,12 +66,7 @@
                 <div class="mb-3">
                     <label for="rg" class="form-label">RG</label>
                     <input class="form-control" type="text" name="rg" id="rg" placeholder="Digite o RG:" />
-                </div>
-
-                <div class="form-group"></div>
-                    <button type="submit" name="btnEnviar" id="btnEnviar" 
-                    class="btn btn-success btn-lg float-right"> Enviar </button>
-                </div>      
+                </div>   
     </div>
 <script type="text/javascript">
 
