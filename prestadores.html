@@ -24,15 +24,34 @@
         mainButton.show();
         
         mainButton.onClick( function (){
-            alert('Rodei!') 
-            window.Telegram.WebApp.sendData("Vim Do Front!");
+            const nome = document.getElementById("nome").value;
+            const profissao = document.getElementById("funcao").value;
+            const endereco = document.getElementById("endereco").value;
+            const bairro = document.getElementById("bairro").value;
+            const cidade = document.getElementById("cidade").value;
+            const cep = document.getElementById("cep").value;
+            const cpf = document.getElementById("cpf").value;
+            const rg = document.getElementById("rg").value;
+
+            const dados = {
+                "nome":nome,
+                "profissao":profissao,
+                "endereco":endereco,
+                "bairro":bairro,
+                "cidade":cidade,
+                "cep":cep,
+                "cpf":cpf,
+                "rg":rg
+            }
+            Alert("Cadastro Efetuado com sucesso !");
+            window.Telegram.WebApp.sendData(JSON.stringify(dados));
         }) 
 }
     </script>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
-        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v3.3</h3>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v3.4</h3>
     </div>
     <div class="container container-sm container-md painel">
                 <div class="mb-3">
