@@ -14,7 +14,6 @@
         }
     </style>
     <script type="text/javascript">
-    function inicio(){
         window.Telegram.WebApp.ready();
         window.Telegram.WebApp.expand();
 
@@ -23,21 +22,19 @@
         mainButton.enable(); 
         mainButton.show();
         mainButton.onClick( function (){
-            alert('Rodei!') 
-            window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}}));
-            //JSON.stringify("msg:Eai Mano") 
-        }) 
+        alert('Rodei!') 
+        window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}) 
+        }); 
         
-}
     </script>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
-        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço</h3>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço  v4.2</h3>
     </div>
     <div class="container container-sm container-md painel">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome do Prestador v4.1</label>
+                    <label for="nome" class="form-label">Nome do Prestador</label>
                     <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite aqui o seu nome:" />
                 </div>
                 <div class="mb-3">
