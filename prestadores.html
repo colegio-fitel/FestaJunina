@@ -14,25 +14,26 @@
         }
     </style>
     <script type="text/javascript">
-        function inicio(){
-            window.Telegram.WebApp.ready();
-            window.Telegram.WebApp.expand();
-            
-            const mainButton = window.Telegram.WebApp.MainButton; 
-            mainButton.text = "Salvar preferências"; 
-            mainButton.enable(); 
-            mainButton.onClick( 
-                function (){
-                    alert('Rodei!') 
-                    window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}) 
-           });
-           mainButton.show();
-        }
+    function inicio(){
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+
+        const mainButton = window.Telegram.WebApp.MainButton; 
+        mainButton.text = "Salvar preferências"; 
+        mainButton.enable(); 
+        mainButton.show();
+        
+        mainButton.onClick( function (){
+            alert('Rodei!') 
+            window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}}));
+            //JSON.stringify("msg:Eai Mano") 
+        }) 
+}
     </script>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
-        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço  v3.1</h3>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v3.2</h3>
     </div>
     <div class="container container-sm container-md painel">
                 <div class="mb-3">
@@ -68,8 +69,33 @@
                     <input class="form-control" type="text" name="rg" id="rg" placeholder="Digite o RG:" />
                 </div>   
     </div>
-    <script type="text/javascript>
-                         
-    </script>
+<script type="text/javascript">
+
+function envia_dados(){
+    const nome = document.getElementById("nome").value;
+    const profissao = document.getElementById("funcao").value;
+    const endereco = document.getElementById("endereco").value;
+    const bairro = document.getElementById("bairro").value;
+    const cidade = document.getElementById("cidade").value;
+    const cep = document.getElementById("cep").value;
+    const cpf = document.getElementById("cpf").value;
+    const rg = document.getElementById("rg").value;
+
+    const dados = {
+        "nome":nome,
+        "profissao":profissao,
+        "endereco":endereco,
+        "bairro":bairro,
+        "cidade":cidade,
+        "cep":cep,
+        "cpf":cpf,
+        "rg":rg
+    }
+
+    window.Telegram.WebApp.sendData('Ola Mundo!');
+    window.Telegram.WebApp.close();
+    alert(rg);
+}
+</script>
 </body>
 </html>
