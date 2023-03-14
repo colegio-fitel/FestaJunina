@@ -22,7 +22,7 @@
     mainButton.enable(); 
     mainButton.show();
         
-    mainButton.onClick( function ()
+    mainButton.addEventListner('click', function ()
     {
         let nome = document.getElementById("nome").value;
         let profissao = document.getElementById("funcao").value;
@@ -43,9 +43,9 @@
             "cpf":cpf,
             "rg":rg
         }
-            Alert("Cadastro Efetuado com sucesso !");
+            window.alert("Cadastro Efetuado com sucesso !");
             window.Telegram.WebApp.sendData(JSON.stringify(dados));
-    }) 
+    }));
     </script>
 </head>
 <body onload="inicio();">
