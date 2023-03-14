@@ -24,14 +24,14 @@
         mainButton.show();
         
         mainButton.onClick( function (){
-            const nome = document.getElementById("nome").value;
-            const profissao = document.getElementById("funcao").value;
-            const endereco = document.getElementById("endereco").value;
-            const bairro = document.getElementById("bairro").value;
-            const cidade = document.getElementById("cidade").value;
-            const cep = document.getElementById("cep").value;
-            const cpf = document.getElementById("cpf").value;
-            const rg = document.getElementById("rg").value;
+            let nome = document.getElementById("nome").value;
+            let profissao = document.getElementById("funcao").value;
+            let endereco = document.getElementById("endereco").value;
+            let bairro = document.getElementById("bairro").value;
+            let cidade = document.getElementById("cidade").value;
+            let cep = document.getElementById("cep").value;
+            let cpf = document.getElementById("cpf").value;
+            let rg = document.getElementById("rg").value;
 
             const dados = {
                 "nome":nome,
@@ -44,14 +44,14 @@
                 "rg":rg
             }
             Alert("Cadastro Efetuado com sucesso !");
-            window.Telegram.WebApp.sendData(JSON.stringify(dados));
+            window.Telegram.WebApp.sendData(nome);
         }) 
 }
     </script>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
-        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v3.4</h3>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v3.5</h3>
     </div>
     <div class="container container-sm container-md painel">
                 <div class="mb-3">
