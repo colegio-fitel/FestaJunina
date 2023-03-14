@@ -22,6 +22,11 @@
         mainButton.text = "Salvar preferências"; 
         mainButton.enable(); 
         mainButton.show();
+        mainButton.onClick( function (){
+            alert('Rodei!') 
+            window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}}));
+            //JSON.stringify("msg:Eai Mano") 
+        }) 
         
 }
     </script>
@@ -32,7 +37,7 @@
     </div>
     <div class="container container-sm container-md painel">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome do Prestador</label>
+                    <label for="nome" class="form-label">Nome do Prestador v4.1</label>
                     <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite aqui o seu nome:" />
                 </div>
                 <div class="mb-3">
@@ -64,12 +69,5 @@
                     <input class="form-control" type="text" name="rg" id="rg" placeholder="Digite o RG:" />
                 </div>   
     </div>
-<script type="text/javascript">
- mainButton.onClick( function (){
-            alert('Rodei!') 
-            window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}}));
-            //JSON.stringify("msg:Eai Mano") 
-        }) 
-</script>
 </body>
 </html>
