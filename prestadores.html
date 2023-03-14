@@ -17,12 +17,21 @@
         function inicio(){
             window.Telegram.WebApp.ready();
             window.Telegram.WebApp.expand();
+            
+            const mainButton = window.Telegram.WebApp.MainButton; 
+            mainButton.text = "Salvar preferências"; 
+            mainButton.enable(); 
+            mainButton.onClick( 
+                function (){
+                    alert('Rodei!') 
+                    window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}) 
+           });            
         }
     </script>
 </head>
 <body onload="inicio();">
     <div class="jumbotron">
-        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço  v4.4</h3>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço  v4.5</h3>
     </div>
     <div class="container container-sm container-md painel">
                 <div class="mb-3">
@@ -59,14 +68,7 @@
                 </div>   
     </div>
     <script type="text/javascript>
-        const mainButton = window.Telegram.WebApp.MainButton; 
-        mainButton.text = "Salvar preferências"; 
-        mainButton.enable(); 
-        mainButton.show();
-        mainButton.onClick( function (){
-        alert('Rodei!') 
-        window.Telegram.WebApp.sendData(JSON.stringify({'msg':'Dados do front!'}) 
-        });                                     
+                         
     </script>
 </body>
 </html>
