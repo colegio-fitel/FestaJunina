@@ -13,13 +13,8 @@
             overflow-y: scroll;
         }
     </style>
-    <script type="text/javascript">
-    window.Telegram.WebApp.ready();
-    window.Telegram.WebApp.expand();
-    const mainButton = window.Telegram.WebApp.MainButton; 
-    </script>
 </head>
-<body onload="inicio();">
+<body>
     <div class="jumbotron">
         <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v4</h3>
     </div>
@@ -58,35 +53,40 @@
                     <input class="form-control" type="text" name="rg" id="rg" placeholder="Digite o RG:" />
                 </div>   
     </div>
-    <script type="applicattion/javascript">
-     mainButton.text = "Salvar Prestador"; 
-    mainButton.enable(); 
-    mainButton.show();
-        
-    mainButton.onClick(function ()
-    {
-        let nome = document.getElementById("nome").value;
-        let profissao = document.getElementById("funcao").value;
-        let endereco = document.getElementById("endereco").value;
-        let bairro = document.getElementById("bairro").value;
-        let cidade = document.getElementById("cidade").value;
-        let cep = document.getElementById("cep").value;
-        let cpf = document.getElementById("cpf").value;
-        let rg = document.getElementById("rg").value;
 
-        const dados = {
-            "nome":nome,
-            "profissao":profissao,
-            "endereco":endereco,
-            "bairro":bairro,
-            "cidade":cidade,
-            "cep":cep,
-            "cpf":cpf,
-            "rg":rg
-        }
-            window.alert("Cadastro Efetuado com sucesso !");
-            window.Telegram.WebApp.sendData(JSON.stringify(dados));
-    });
+    <script type="text/javascript">
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+        const mainButton = window.Telegram.WebApp.MainButton; 
+        mainButton.text = "Salvar Prestador"; 
+        mainButton.enable(); 
+        mainButton.show();
+            
+        mainButton.onClick( function ()
+        {
+            let nome = document.getElementById("nome").value;
+            let profissao = document.getElementById("funcao").value;
+            let endereco = document.getElementById("endereco").value;
+            let bairro = document.getElementById("bairro").value;
+            let cidade = document.getElementById("cidade").value;
+            let cep = document.getElementById("cep").value;
+            let cpf = document.getElementById("cpf").value;
+            let rg = document.getElementById("rg").value;
+
+            const dados = {
+                "nome":nome,
+                "profissao":profissao,
+                "endereco":endereco,
+                "bairro":bairro,
+                "cidade":cidade,
+                "cep":cep,
+                "cpf":cpf,
+                "rg":rg
+            }
+                Alert("Cadastro Efetuado com sucesso !");
+                window.Telegram.WebApp.sendData(JSON.stringify(dados));
+        }) 
     </script>
+
 </body>
 </html>
