@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="jumbotron">
-        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v4</h3>
+        <h3 class="text-center text-muted">Cadastro de Prestador de Serviço v4.4</h3>
     </div>
     <button id="btn">Testart</button>
     <div class="container container-sm container-md painel">
@@ -66,22 +66,16 @@
         {
             let nome = document.getElementById("nome").value;
             let profissao = document.getElementById("funcao").value;
-            let endereco = document.getElementById("endereco").value;
-            let bairro = document.getElementById("bairro").value;
-            let cidade = document.getElementById("cidade").value;
-            let cep = document.getElementById("cep").value;
-            let cpf = document.getElementById("cpf").value;
-            let rg = document.getElementById("rg").value;
+            // let endereco = document.getElementById("endereco").value;
+            // let bairro = document.getElementById("bairro").value;
+            // let cidade = document.getElementById("cidade").value;
+            // let cep = document.getElementById("cep").value;
+            // let cpf = document.getElementById("cpf").value;
+            // let rg = document.getElementById("rg").value;
 
             const dados = {
                 "nome":nome,
-                "profissao":profissao,
-                "endereco":endereco,
-                "bairro":bairro,
-                "cidade":cidade,
-                "cep":cep,
-                "cpf":cpf,
-                "rg":rg
+                "profissao":profissao
             }
                 Alert("Cadastro Efetuado com sucesso !");
                 window.Telegram.WebApp.sendData(JSON.stringify(dados));
